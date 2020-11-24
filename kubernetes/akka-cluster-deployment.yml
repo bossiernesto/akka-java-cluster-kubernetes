@@ -1,4 +1,4 @@
-apiVersion: extensions/v1beta1
+apiVersion: apps/v1
 kind: Deployment
 metadata:
   labels:
@@ -25,13 +25,15 @@ spec:
       containers:
       - name: akka-cluster-demo
 # Use the following line when running with minishift
-#        image: akka-cluster-demo:1.0.0
+        image: akka-cluster-demo:1.0.1
 # Use the following line when running with OpenShift and using the internal container registry
-        image: image-registry.openshift-image-registry.svc:5000/akka-cluster-1/akka-cluster-demo:1.0.0
+        #image: image-registry.openshift-image-registry.svc:5000/akka-cluster-1/akka-cluster-demo:1.0.0
         imagePullPolicy: Always
         livenessProbe:
           tcpSocket:
             port: 8558
+          # on my test machine it takes about 120 seconds for first node to form a cluster
+          initialDelaySeconds: 180   
         ports:
         - name: http
           containerPort: 8080
