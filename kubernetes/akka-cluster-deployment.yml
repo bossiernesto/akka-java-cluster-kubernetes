@@ -28,7 +28,7 @@ spec:
         image: akka-cluster-demo:1.0.1
 # Use the following line when running with OpenShift and using the internal container registry
         #image: image-registry.openshift-image-registry.svc:5000/akka-cluster-1/akka-cluster-demo:1.0.0
-        imagePullPolicy: Always
+        imagePullPolicy: IfNotPresent
         livenessProbe:
           tcpSocket:
             port: 8558
